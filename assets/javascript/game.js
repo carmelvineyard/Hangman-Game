@@ -25,9 +25,6 @@
 	  	var blanksAndSuccesses = [];
 
 
-	$("#button").on("click", function() {
-		reset();
-	});
 
  function reset() {
 	  	guessCount = 9;
@@ -43,16 +40,15 @@
     			blanksAndSuccesses.push("_");
     	}
     	console.log(blanksAndSuccesses);
-    	//document.getElementById("lives-stat").innerHTML = lives; idk why this was an error but restating the var earlier wasn't.
+    	
     	$("#guess-stat").html(guessCount);
-    	//document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+    	
     	$("#word").html(blanksAndSuccesses.join(" "));
-    	//$("word-blanks").html(blanksAndSuccesses.join(" "));
-    	//document.getElementById("wrong").innerHTML = wrongGuesses.join(" ");
+    	
     	$("#wrong").html(wrongGuesses.join(" "));
-    	//document.getElementById("guess-stat").innerHTML = "Guesses: " + guessCount;	
+    	
     	$("#guess-stat").text("Guesses: " + guessCount);
-		};
+ };
 	
 	
   	
