@@ -7,7 +7,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 
-	<script src="assets/javascript/game.js"></script>
+	
 	
 	<title>Board Game Hangman</title>
 	
@@ -17,20 +17,33 @@
 
 <body>
 
-	<div class="jumbotron text-center">
-		<h1>It's time for Board Game Hangman!</h1>
-		<h3>In this game, all the words are names of board games, some classic and some newer. Click the knight to play. Good luck!</h3>
+	<div class="container">
+		<div class="jumbotron text-center">
+			<h1>It's time for Board Game Hangman!</h1>
+			<h3>In this game, all the words are names of board games, some classic and some newer. Click the knight to play. Good luck!</h3>
+		</div>
 	</div>
-	<div class="col-12 text-center text-big" id="stats"></div>
-	<div class="text-center">
-		<button id="button" class="btn btn-primary btn-m">
-			<h1><span class="glyphicon glyphicon-knight"></span></h1></button>
-	</div>
-	<div class="col-12 text-center text-big" id="word"></div>
-	<div class="col-12 text-center text-big"><ul id="wrong"></ul></div>
-	
+	<div class="container col-12" id="stats">
 
-	  
+		<div class="row">
+			<span class="col-sm-4 text-center text-big" id="guess-stat"></span>
+			<span class="col-sm-4 text-center text-big" id="wins-stat"></span>
+			<span class="col-sm-4 text-center text-big" id="losses-stat"></span>
+		</div>
+		
+		<div class="text-center">
+			<button id="button" class="btn btn-primary btn-m">
+				<h1><span class="glyphicon glyphicon-knight"></span></h1></button>
+		</div>
+
+		<div class="col-12 text-center text-big" id="word"></div>
+
+		<div class="col-12 text-center text-big"><span id="wrong"></span></div>
+
+	</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+<script src="assets/javascript/game.js"></script>  
 	
 </body>
 </html>

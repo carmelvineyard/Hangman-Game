@@ -13,71 +13,109 @@
 		  "hive"
 		];
 
-	//Global variables
-	  	var wins = 0;
+	//global variables
+		var wins = 0;
 	  	var losses = 0;
-	  	var lives = 9;
+	  	var guessCount = 0;
+	  	var guessesLeft = 9;
 	  	var currentWord = "";
-	  	var blanks = [];
-	  	var wordCount = 0;
-	  	
+	  	var blanks = [];  //same as lettersInChosenWord, should break currentWord into an array and store them.
+	  	var wordCount = 0;  //I believe this is the same as numBlanks in the solution.
+	  	var wrongGuesses = [];
+	  	var blanksAndSuccesses = [];
 
-	//to put lives, wins, and losses into the stats div
-			//At the last minute I realized this wasn't showing up. It was earlier in the night! *headdesk*
-	  document.getElementById("stats").innerHTML = 
-	  	"Lives:  " + lives + "      Wins:  " + wins + "     Losses: " + losses;
+
+	$("#button").on("click", function() {
+		reset();
+	});
+
+ function reset() {
+	  	guessCount = 9;
+	  	currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+	  	blanks = currentWord.split("");
+	  	wordCount = currentWord.length;
+	  	console.log(currentWord);
+	  	blanksAndSuccesses = [];
+	  	wrongGuesses = [];
+
+	  //as well as displaying the new word as underscores
+    	for (var i = 0; i < wordCount; i++){
+    			blanksAndSuccesses.push("_");
+    	}
+    	console.log(blanksAndSuccesses);
+    	//document.getElementById("lives-stat").innerHTML = lives; idk why this was an error but restating the var earlier wasn't.
+    	$("#guess-stat").html(guessCount);
+    	//document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+    	$("#word").html(blanksAndSuccesses.join(" "));
+    	//$("word-blanks").html(blanksAndSuccesses.join(" "));
+    	//document.getElementById("wrong").innerHTML = wrongGuesses.join(" ");
+    	$("#wrong").html(wrongGuesses.join(" "));
+    	//document.getElementById("guess-stat").innerHTML = "Guesses: " + guessCount;	
+    	$("#guess-stat").text("Guesses: " + guessCount);
+		};
+	
+	
+  	
+	  function checkLetter(guessLetter) {
+	  	var letterInWord = false;              
+	  	for (var i = 0; i < wordCount; i++) {
+	  		if (currentWord[i] === guessLetter) {
+	  			letterInWord = true;
+	  		}
+	  	}
+	  	if (letterInWord) {
+	  		for (var j = 0; j < wordCount; j++) {
+	  			if (currentWord[j] === guessLetter) {
+	  				blanksAndSuccesses[j] = guessLetter;
+	  			}
+	  		}
+	  	console.log(blanksAndSuccesses);
+	  	}
+	  	else {
+	  		wrongGuesses.push(guessLetter);
+	  		guessCount--;
+	  	}
+	  	//to put lives, wins, and losses into the stats div
+			
+	  $("#guess-stat").html("Guesses:  " + guessCount);
+	  
+	  $("#wins-stat").html("Wins: " + wins);
+	  $("#losses-stat").html("Losses " + losses); 
+
+	  }  	
+
+	  function roundComplete() {
+	  	console.log("Guesses: " + guessCount);
+	  	$("#guess-stat").html("Guesses: " + guessCount);
+	  	$("#word").html(blanksAndSuccesses.join(" "));
+	  	$("#wrong").html(wrongGuesses.join(" "));
+
+	  	if (blanks.toString() === blanksAndSuccesses.toString()) {
+	  		wins++;
+	  		alert("Congratulations! You Win!");
+	  		$("#wins-stat").html("Wins: " + wins);
+	  	}
+	  	else if (guessCount === 0) {
+	  		losses++;
+	  		alert("The hangman has perished!");
+	  		$("#losses-stat").html("Losses: " + losses);
+	  	}
+
+	  }
+
+//============Function calls=================
 
 	//button click resets lives and picks new word
-	  document.getElementById("button").onclick  = function() {reset()};
+		$("#button").on("click", function() {
+			reset();
+		});
+	 
 
-	  function reset() {
-	  	var lives = 9;
-	  	var wordCount = 0;
-	  	var currentWord = wordList[Math.floor(Math.random() * 
-	  		wordList.length)];
-	  	
-	  //as well as displaying the new word as underscores
-    	document.getElementById("word").innerHTML = blanks;
-    		for (var i = 0; i < currentWord.length; i++){
-    			blanks.push("_");
-    		}
-		};
-	//Good for testing purposes, works when there's not syntax errors.
-	console.log(currentWord);
-  	
-	  	
 	//onkeyup event named userGuess, makes input lower case:
 		document.onkeyup = function(event) {
 			var guessLetter = String.fromCharCode(event.keyCode).toLowerCase(); 
+			console.log(guessLetter);
+			checkLetter(guessLetter);
+			roundComplete();
+		}	 
 
-		//then starts the checkLetter loop.
-			for (var i = 0; i < currentWord.length; i++) {
-			  if (currentWord[i] === guessLetter) {
-				currentWord[i].innerHTML = guessLetter;
-				wordCount = ++;  //This is where the first syntax error pops up. I suspect there's a cascade of them.
-
-					if wordCount === currentWord.length {
-						alert("Congratulations! You Win!");
-						document.getElementById("wrong").innerHTML = " ";
-					}
-
-				  else {
-				  	var node = document.createElement("li");
-				  	var textnode = document.createTextNode(guessLetter);
-				  	node.appendChild(textnode);
-					document.getElementById("wrong").appendChild(node);
-					lives = --;
-					  if lives === 0 {
-						alert("Game Over!");
-						document.getElementById("wrong").innerHTML = " ";
-						losses = ++;
-					  }
-				  }
-			  }
-		}
-
-
-	
-	//}	 
-	//  }
-	
