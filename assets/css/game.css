@@ -23,10 +23,6 @@
 			margin: 20px;
 		}
 		
-/*These last two I copied and modified from someone's attempt to have the underscores show up. As
-I've never gotten that part working, I don't actually know if this will make the incorrect guesses 
-show up in a horizontal line.*/
-
 		#wrong {
   			margin: 0;
   			display: block;
