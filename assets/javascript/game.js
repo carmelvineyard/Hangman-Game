@@ -20,7 +20,7 @@
 	  	var guessesLeft = 9;
 	  	var currentWord = "";
 	  	var blanks = [];  //same as lettersInChosenWord, should break currentWord into an array and store them.
-	  	var wordCount = 0;  //I believe this is the same as numBlanks in the solution.
+	  	var wordCount = 0;  
 	  	var wrongGuesses = [];
 	  	var blanksAndSuccesses = [];
 
@@ -35,7 +35,7 @@
 	  	blanksAndSuccesses = [];
 	  	wrongGuesses = [];
 
-	  //as well as displaying the new word as underscores
+	  // displays the new word as underscores
     	for (var i = 0; i < wordCount; i++){
     			blanksAndSuccesses.push("_");
     	}
@@ -71,8 +71,8 @@
 	  		wrongGuesses.push(guessLetter);
 	  		guessCount--;
 	  	}
-	  	//to put lives, wins, and losses into the stats div
-			
+	  	
+		//to put lives, wins, and losses into the stats div	
 	  $("#guess-stat").html("Guesses:  " + guessCount);
 	  
 	  $("#wins-stat").html("Wins: " + wins);
